@@ -1,0 +1,35 @@
+version: "3.3"
+
+services:
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/Nginx.Dockerfile
+        ports:
+            - 8098:80
+        links:
+            -   fpm
+        volumes:
+            -   ./:/var/www/laravel-docker
+    fpm:
+        build:
+            context: .
+            dockerfile: docker/Fpm.dockerfile
+        volumes:
+            -   ./:/var/www/laravel-docker
+        links:
+            -   mysql
+    mysql:
+        container_name: booking-mysql
+        platform: linux/arm64/v8
+        image: mysql:8.0
+        restart: always
+        volumes:
+            - ./mysql/datadir:/var/lib/mysql
+        ports:
+            -   3306:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_PASSWORD=root
+            - MYSQL_DATABASE=booking
+

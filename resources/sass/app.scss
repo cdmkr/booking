@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "../vendor/datepicker.min.css";
+@import 'intl-tel-input/build/css/intlTelInput.css';
+
+.filter-form{
+    .easepick-wrapper{
+        z-index: 50!important;
+    }
+
+
+}
+
+.booking-form{
+    &>div{
+       margin-bottom: 10px;
+    }
+}
